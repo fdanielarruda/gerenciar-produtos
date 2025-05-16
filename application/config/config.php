@@ -47,7 +47,7 @@ if ($app_port === '80' || $app_port === '') {
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
