@@ -1,12 +1,7 @@
-Claro, Daniel! Aqui está um exemplo de README em português que explica como instalar e executar o projeto **com Docker** e **sem Docker**, passo a passo.
 
----
-
-# 🛠 Montink Test App
+# Montink Test
 
 Este projeto é uma aplicação PHP com Apache e MySQL, que também utiliza um servidor de socket. Ele pode ser executado facilmente via Docker ou manualmente.
-
----
 
 ## 📦 Requisitos
 
@@ -17,22 +12,20 @@ Este projeto é uma aplicação PHP com Apache e MySQL, que também utiliza um s
 
 ### ✅ Sem Docker
 
-* PHP 8.1+
+* PHP 8.1 (limite para utilizar o codeigniter 3)
 * Apache 2.4+
 * MySQL 5.7
 * Node.js (para o socket server)
 * Composer (para dependências PHP, se houver)
 * npm/yarn (para dependências do socket)
 
----
-
 ## 🚀 Como rodar com Docker
 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/fdanielarruda/gerenciar-produtos.git
+cd gerenciar-produtos
 ```
 
 ### 2. Crie um arquivo `.env`
@@ -40,14 +33,23 @@ cd seu-repositorio
 Crie um arquivo `.env` na raiz com as variáveis necessárias:
 
 ```env
-DB_ROOT_PASSWORD=root
+# Banco de dados
+DB_ROOT_USER=montink_root
+DB_ROOT_PASSWORD=sua_senha
 DB_NAME=montink_db
+DB_PORT=3307
+
+# App principal
+APP_PORT=8080
+
+# Servidor de Socket
+SOCKET_PORT=3000
 ```
 
 ### 3. Suba os containers
 
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 A aplicação estará disponível em: [http://localhost:8080](http://localhost:8080)
@@ -55,8 +57,8 @@ A aplicação estará disponível em: [http://localhost:8080](http://localhost:8
 ### 4. Acesso ao banco de dados
 
 * Host: `localhost`
-* Porta: `3307`
-* Usuário: `root`
+* Porta: definido em `DB_PORT`
+* Usuário: definido em `DB_ROOT_USER`
 * Senha: definida na variável `DB_ROOT_PASSWORD`
 * Banco: definido em `DB_NAME`
 
@@ -67,7 +69,7 @@ A aplicação estará disponível em: [http://localhost:8080](http://localhost:8
 ### 1. Instale e configure o ambiente manualmente
 
 * Apache com suporte a `.htaccess` e `mod_rewrite`
-* PHP 8.1 com extensão `mysqli`
+* PHP 8.1 (limite da versão 3 do codeigniter) com extensão `mysqli` e `phpcurl`
 * MySQL 5.7 com um banco de dados criado
 
 ### 2. Configure o Apache
@@ -105,20 +107,4 @@ npm start
 
 Por padrão, ele rodará em: [http://localhost:3000](http://localhost:3000)
 
----
 
-## 🧪 Teste
-
-Acesse [http://localhost:8080](http://localhost:8080) para ver a aplicação rodando.
-
-Verifique também se o socket responde em [http://localhost:3000](http://localhost:3000).
-
----
-
-## ❓ Dúvidas
-
-Caso tenha problemas ou dúvidas, sinta-se à vontade para abrir uma *issue* ou enviar um e-mail.
-
----
-
-Se quiser, posso adaptar esse README para inglês também. Deseja isso?
