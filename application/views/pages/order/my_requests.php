@@ -62,7 +62,8 @@
 
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script>
-    const socket = io("http://localhost:3000");
+    const port = "<?= $_ENV['SOCKET_PORT'] ?>" ?? "3000";
+    const socket = io("http://localhost:" + port);
 
     socket.on("order_updated", function(data) {
         console.log("Pedido atualizado via socket:", data);

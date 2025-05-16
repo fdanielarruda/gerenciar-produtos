@@ -30,3 +30,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+.env
+/socket-server/node_modules
+/socket-server/package-lock.json

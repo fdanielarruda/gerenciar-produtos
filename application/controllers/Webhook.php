@@ -95,7 +95,7 @@ class Webhook extends CI_Controller
 
     private function notify_socket($data)
     {
-        $url = 'http://socket:3000/notify-update';
+        $url = "http://socket:3000/notify-update";
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_POST, true);

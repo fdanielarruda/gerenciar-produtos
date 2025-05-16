@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
@@ -20,4 +22,6 @@ app.post('/notify-update', express.json(), (req, res) => {
     res.send({ status: 'ok' });
 });
 
-server.listen(3000, () => console.log('Socket rodando na porta 3000'));
+const PORT = process.env.SOCKET_PORT || 3000;
+
+server.listen(PORT, () => console.log(`Socket rodando na porta ${PORT}`));
