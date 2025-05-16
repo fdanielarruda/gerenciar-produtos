@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: montink_test_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+      - socket
+    networks:
+      - montink_net
+
+  db:
+    image: mysql:5.7
+    container_name: montink_test_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - montink_net
+
+  socket:
+    build:
+      context: ./socket-server
+      dockerfile: Dockerfile
+    container_name: montink_test_socket
+    ports:
+      - "3000:3000"
+    networks:
+      - montink_net
+
+volumes:
+  db_data:
+
+
+networks:
+  montink_net:
+    driver: bridge
