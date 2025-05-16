@@ -37,13 +37,14 @@ services:
       dockerfile: Dockerfile
     container_name: montink_test_socket
     ports:
-      - "${SOCKET_PORT:-3000}:3000"
+      - "${SOCKET_PORT:-3000}:${SOCKET_PORT:-3000}"
+    environment:
+      - SOCKET_PORT=${SOCKET_PORT:-3000}
     networks:
       - montink_net
 
 volumes:
   db_data:
-
 
 networks:
   montink_net:
