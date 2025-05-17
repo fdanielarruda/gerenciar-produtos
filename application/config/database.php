@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'db',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'montink_test',
+	'hostname' => $_ENV['DB_HOST'],
+	'username' => $_ENV['DB_ROOT_USER'],
+	'password' => $_ENV['DB_ROOT_PASSWORD'],
+	'database' => $_ENV['DB_NAME'],
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

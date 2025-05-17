@@ -20,14 +20,14 @@ services:
     image: mysql:5.7
     container_name: montink_test_db
     restart: always
+    ports:
+      - "${DB_PORT:-3306}:3306"
     environment:
-      MYSQL_ROOT_USER: ${DB_ROOT_USER:-root}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
-    ports:
-      - "${DB_PORT:-3307}:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
     networks:
       - montink_net
 
