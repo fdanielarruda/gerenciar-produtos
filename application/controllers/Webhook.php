@@ -47,17 +47,17 @@ class Webhook extends CI_Controller
             $this->db->trans_begin();
 
             if ($new_status === 'pending') {
-                $this->Order_model->update($order_id, ['status' => 'pending']);
+                $this->Order_model->update($order_id, ['updated_at' => date('Y-m-d H:i:s'), 'status' => 'pending']);
                 echo json_encode(['message' => 'Status do pedido atualizado para pendente']);
             }
 
             if ($new_status === 'paid') {
-                $this->Order_model->update($order_id, ['status' => 'paid']);
+                $this->Order_model->update($order_id, ['updated_at' => date('Y-m-d H:i:s'), 'status' => 'paid']);
                 echo json_encode(['message' => 'Status do pedido atualizado para pago']);
             }
 
             if ($new_status === 'completed') {
-                $this->Order_model->update($order_id, ['status' => 'completed']);
+                $this->Order_model->update($order_id, ['updated_at' => date('Y-m-d H:i:s'), 'status' => 'completed']);
                 echo json_encode(['message' => 'Status do pedido atualizado para completo']);
             }
 
