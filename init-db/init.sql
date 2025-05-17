@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `coupons` (
   `type` enum('percentage','amount') NOT NULL,
   `min_value` decimal(10,2) DEFAULT NULL,
   `valid_until` datetime DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -35,7 +36,6 @@ CREATE TABLE IF NOT EXISTS `stocks` (
 
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `coupon_id` int DEFAULT NULL,
   `coupon_code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `coupon_value` decimal(10,2) DEFAULT NULL,
   `customer_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -49,9 +49,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `products` json DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `orders_coupon_fk_idx` (`coupon_id`),
-  CONSTRAINT `orders_coupon_fk` FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `products` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
@@ -79,3 +77,8 @@ INSERT INTO `stocks` (`id`, `product_id`, `quantity`, `created_at`, `updated_at`
 (9, 12, 100, NOW(), NOW()),
 (10, 13, 100, NOW(), NOW()),
 (11, 10, 100, NOW(), NOW());
+
+INSERT INTO `coupons` (`id`, `code`, `discount`, `type`, `min_value`, `valid_until`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, '10OFF', 10.00, 'percentage', NULL, '2024-12-31 23:59:59', 1, NOW(), NOW()),
+(2, '5OFF', 5.00, 'amount', NULL, '2024-12-31 23:59:59', 1, NOW(), NOW()),
+(3, 'FREESHIP', 0.00, 'amount', 50.00, '2024-12-31 23:59:59', 1, NOW(), NOW());

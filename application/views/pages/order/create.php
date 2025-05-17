@@ -157,7 +157,8 @@
 <div class="row g-3 mb-4 mt-2">
     <div class="col-md-9">
         <label for="coupon_code" class="form-label fw-semibold">Código do Cupom</label>
-        <input type="text" class="form-control" id="coupon_code" name="coupon_code" placeholder="Digite o cupom" required>
+        <input type="text" class="form-control" id="coupon_code" name="coupon_code" placeholder="Digite o cupom" required
+            value="<?= $this->session->userdata('applied_coupon')['code'] ?? '' ?>">
     </div>
     <div class="col-md-3 d-flex align-items-end">
         <button type="submit" class="btn btn-secondary fw-bold w-100">
@@ -172,7 +173,8 @@
 <div class="row g-3 mb-4">
     <div class="col-md-9">
         <label for="cep" class="form-label fw-semibold">CEP para cálculo do frete</label>
-        <input type="text" class="form-control" id="cep" name="cep" placeholder="00000-000" value="<?= $this->session->userdata('cep') ?? '' ?>" required>
+        <input type="text" class="form-control" id="cep" name="cep" placeholder="00000-000" required
+            value="<?= $this->session->userdata('cep') ?? '' ?>">
     </div>
     <div class="col-md-3 d-flex align-items-end">
         <button type="submit" class="btn btn-info fw-bold w-100">
@@ -183,15 +185,19 @@
 <?php echo form_close(); ?>
 
 <?php echo form_open('order/checkout'); ?>
+<?php $old = $this->session->flashdata('old_input') ?? []; ?>
+
 <div class="row g-3 mb-4">
     <div class="col-md-6">
         <label for="name" class="form-label fw-semibold">Nome</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Seu nome completo" required>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Seu nome completo" required
+            value="<?= isset($old['name']) ? htmlspecialchars($old['name']) : '' ?>">
     </div>
 
     <div class="col-md-6">
         <label for="email" class="form-label fw-semibold">Email</label>
-        <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Seu email" required>
+        <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="Seu email" required
+            value="<?= isset($old['customer_email']) ? htmlspecialchars($old['customer_email']) : '' ?>">
     </div>
 </div>
 

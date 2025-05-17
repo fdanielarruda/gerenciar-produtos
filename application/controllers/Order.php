@@ -39,6 +39,12 @@ class Order extends CI_Controller
     public function checkout()
     {
         $cart = $this->session->userdata('cart') ?? [];
+
+        $this->session->set_flashdata('old_input', [
+            'name' => $this->input->post('name'),
+            'customer_email' => $this->input->post('customer_email'),
+        ]);
+
         if (empty($cart)) {
             $this->session->set_flashdata('error', 'Seu carrinho está vazio.');
             return redirect('order/create');
@@ -83,11 +89,13 @@ class Order extends CI_Controller
         $quantity = (int)$this->input->post('quantity');
 
         if (!$product_id || $quantity <= 0) {
+            $this->session->set_flashdata('error', 'Produto ou quantidade inválidos.');
             return redirect('order/create');
         }
 
         $product = $this->product_service->get_by_id($product_id);
         if (!$product) {
+            $this->session->set_flashdata('error', 'Produto não encontrado.');
             return redirect('order/create');
         }
 
