@@ -1,3 +1,19 @@
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `tokens` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `expires_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+)
+
 CREATE TABLE IF NOT EXISTS `coupons` (
   `id` int NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -52,6 +68,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(1, 'Administrador', 'admin@root.com', "$2y$10$G7r.SrrHWAq0h8I.TYHhu.mXMF7irXGxlAzGiDkulfUniapQkGf4K");
+
 INSERT INTO `products` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'Coca-Cola 1L', 5.00, NOW(), NOW()),
 (2, 1, 'Coca-Cola Zero 1L', 5.50, NOW(), NOW()),
@@ -60,10 +79,10 @@ INSERT INTO `products` (`id`, `product_id`, `name`, `price`, `created_at`, `upda
 (5, NULL, 'Fanta', 4.00, NOW(), NOW()),
 (6, NULL, 'Sprite', 4.00, NOW(), NOW()),
 (7, NULL, 'Suco de Fruta', 3.50, NOW(), NOW()),
-(8, 7, 'Suco de Manga', 3.50, NOW(), NOW());
+(8, 7, 'Suco de Manga', 3.50, NOW(), NOW()),
 (9, 7, 'Suco de Laranja', 3.50, NOW(), NOW()),
 (10, 7, 'Suco de Uva', 3.50, NOW(), NOW()),
-(11, 7, 'Suco de Abacaxi', 3.50, NOW(), NOW()),
+(11, 7, 'Suco de Abacaxi', 3.50, NOW(), NOW());
 
 INSERT INTO `stocks` (`id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
 (1, 10, 100, NOW(), NOW()),

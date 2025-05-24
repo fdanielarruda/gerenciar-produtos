@@ -17,6 +17,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto gap-2">
                     <li class="nav-item">
+                        <a class="nav-link fw-semibold text-dark hover-nav" href="<?= site_url('auth/api'); ?>">
+                            API
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link fw-semibold text-dark hover-nav" href="<?= site_url('product'); ?>">
                             Produtos
                         </a>
@@ -34,6 +39,11 @@
                     <li class="nav-item">
                         <a class="nav-link fw-semibold text-dark hover-nav" href="<?= site_url('cart'); ?>">
                             Carrinho
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold text-dark hover-nav" href="<?= site_url('auth/logout'); ?>">
+                            Sair
                         </a>
                     </li>
                 </ul>

@@ -9,6 +9,10 @@ class Order extends CI_Controller
         $this->load->helper(['form', 'url']);
         $this->load->library(['form_validation', 'session', 'Product_service', 'Order_service']);
         $this->load->model('Coupon_model');
+
+        if (!$this->session->userdata('logged_in')) {
+            redirect('auth/login');
+        }
     }
 
     public function my_requests()

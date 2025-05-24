@@ -8,6 +8,10 @@ class Coupon extends CI_Controller
         $this->load->database();
         $this->load->helper(['form', 'url']);
         $this->load->library(['form_validation', 'Coupon_service']);
+
+        if (!$this->session->userdata('logged_in')) {
+            redirect('auth/login');
+        }
     }
 
     public function list()

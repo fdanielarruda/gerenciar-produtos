@@ -6,8 +6,32 @@ class Webhook extends CI_Controller
     {
         parent::__construct();
         $this->load->database();
-        $this->load->model(['Order_model', 'Stock_model']);
+        $this->load->model(['Order_model', 'Stock_model', 'Token_model']);
         $this->output->set_content_type('application/json');
+
+        $this->validateHeader();
+    }
+
+    public function validateHeader()
+    {
+        $headers = $this->input->request_headers();
+        $auth_header = isset($headers['Authorization']) ? $headers['Authorization'] : null;
+
+        if (!$auth_header || !preg_match('/Bearer\s(\S+)/', $auth_header, $matches)) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Token de autenticacao ausente ou malformado']);
+            die;
+        }
+
+        $token = $matches[1];
+
+        $token_data = $this->Token_model->get_by_token($token);
+
+        if (!$token_data || strtotime($token_data->expires_at) < time()) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Token invalido ou expirado']);
+            die;
+        }
     }
 
     public function order_status()
